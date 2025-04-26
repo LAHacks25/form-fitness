@@ -1,5 +1,4 @@
 import { NavBar } from "../components/Navbar";
-import Image from "../components/Image";
 import logo from "../assets/logo.svg";
 import Carousel from "../components/Carousel";
 import { NavLink } from "react-router-dom";

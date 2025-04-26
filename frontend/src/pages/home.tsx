@@ -1,3 +1,11 @@
+import LoginButton from "../components/LoginButton";
+import LogoutButton from "../components/LogoutButton";
+
 export default function Home() {
-  return <h1>Hi</h1>;
+  return (
+    <>
+      <LoginButton />
+      <LogoutButton />
+    </>
+  );
 }

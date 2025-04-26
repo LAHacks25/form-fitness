@@ -1,5 +1,5 @@
 import { NavBar } from "../components/Navbar";
-import logo from "../assets/logo.svg";
+import logo from "../assets/logo2.jpg";
 import Carousel from "../components/Carousel";
 import { NavLink } from "react-router-dom";
 

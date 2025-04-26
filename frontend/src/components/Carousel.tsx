@@ -1,5 +1,9 @@
 import "./Carousel.css";
 import { useState, useEffect, useRef } from "react";
+import pushup from "../assets/pushup.webp";
+import situps from "../assets/situps.jpg";
+import legraise from "../assets/legraise.webp";
+import { Ref } from "react";
 
 const useInterval = (
   callback: () => object | null | void,
@@ -22,13 +26,13 @@ const useInterval = (
 };
 
 const Card = ({
-  content,
+  img,
   idx,
   onClick,
   onMouseEnter,
   onMouseLeave,
 }: {
-  content: string;
+  img: string;
   idx: number;
   onClick: () => void;
   onMouseEnter: () => void;
@@ -50,13 +54,13 @@ const Card = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {content} card
+      <img src={img} />
     </div>
   );
 };
 
 const Carousel = () => {
-  const [arr, setArr] = useState(["Left", "Center", "Right"]);
+  const [arr, setArr] = useState([situps, pushup, legraise]);
   const [isRolling, setIsRolling] = useState(true);
 
   const updateArr = (idx: number) => {
@@ -82,7 +86,7 @@ const Carousel = () => {
         <Card
           key={item}
           idx={idx}
-          content={item}
+          img={item}
           onClick={() => updateArr(idx)}
           onMouseEnter={() => setIsRolling(false)}
           onMouseLeave={() => setIsRolling(true)}

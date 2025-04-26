@@ -1,9 +1,69 @@
 .loginContainer {
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--light-color);
+}
+
+.left {
+  background-color: var(--dark-color);
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/login_background.jpg");
+  background-size: cover;
+  background-position: center;
+  image-rendering: smooth;
+  padding-bottom: 50px;
+}
+
+.left::before {
+  content: ""; /* Required to create the pseudo-element */
+  position: absolute; /* Position it over the container */
+  width: 60%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+  z-index: 1; /* Ensure the overlay is on top of the background */
+}
+
+.left > * {
+  position: relative;
+  z-index: 2;
 }
 
 .left p {
   color: var(--light-color);
+  font-family: var(--primary-font);
+}
+
+.welcome {
+  font-size: 64px;
+}
+
+.description {
+  text-align: center;
+  width: 80%;
+}
+
+.authForm {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.signupPrompt {
+  width: 40%;
 }

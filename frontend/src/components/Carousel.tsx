@@ -41,10 +41,10 @@ const Card = ({
   let style = {};
 
   if (idx == 0)
-    style = { opacity: 0.4, transform: "translateX(-45%) scale(0.8)" };
+    style = { opacity: 0.8, transform: "translateX(-45%) scale(0.8)" };
   if (idx == 1) style = { zIndex: 1 };
   if (idx == 2)
-    style = { opacity: 0.4, transform: "translate(45%) scale(0.8)" };
+    style = { opacity: 0.8, transform: "translate(45%) scale(0.8)" };
 
   return (
     <div

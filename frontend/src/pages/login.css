@@ -44,7 +44,7 @@
 
 .left p {
   color: var(--light-color);
-  font-family: Poppins;
+  font-family: var(--primary-font);
 }
 
 .welcome {

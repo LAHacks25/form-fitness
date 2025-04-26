@@ -1,43 +1,49 @@
 import cv2
 import numpy as np
-from Exercise import Exercise
+from exercises.Exercise import Exercise
+from utils.angle import angle
 
 class Pushups(Exercise):
     def __init__(self, perceiver):
         self.keypoints = {
-            'left':[5, 9, 11, 15], # shoulder, wrist, hip, ankle
-            'right':[6, 10, 12, 16]
+            'left':[5, 11, 15], # shoulder, hip, ankle
+            'right':[6, 12, 16],
+            'countL':[5, 9], # shoulder, wrist
+            'countR':[6, 10]
         }
-
         self.perceiver = perceiver
-    
-    def verify(self, frame):
+        self.bestKps = None
+
+        self.down = False
+        self.side = None
+
+    def determineSide(self, frame):
         self.perceiver.detect(frame)
 
-        indices = self.keypoints['left'] + self.keypoints['right']
-        kps = self.perceiver.collect(indices)
+        left = self.perceiver.collect(self.keypoints['left'])
+        right = self.perceiver.collect(self.keypoints['right'])
 
-        for kp in kps:
-            if kp[2] < 0.3:
-                return False
-        
-        return True
-    
-    def grade(self, frame):
-        if not self.verify(frame):
-            return 'Pose not clear.'
-        
-        leftC = np.mean(map(lambda x: x[2], self.keypoints['left']))
-        rightC = np.mean(map(lambda x: x[2], self.keypoints['right']))
+        leftC = np.mean([kp[2] for kp in left])
+        rightC = np.mean([kp[2] for kp in right])
 
         if leftC > rightC:
-            bestKps = self.keypoints['left']
+            self.bestKps = self.keypoints['left']
+            self.side = 'L'
         else:
-            bestKps = self.keypoints['right']
+            self.bestKps = self.keypoints['right']
+            self.side = 'R'
+
+        return leftC >= 0.3 or rightC >= 0.3
+
+    def grade(self, frame):
+        if self.bestKps is None:
+            self.determineSide(frame)
         
-        # angle = 
+        self.perceiver.detect(frame)
 
-
-
-
-
+        points = self.perceiver.collect(self.bestKps)
+        return angle(*points), points
+    
+    # def countReps(self, frame):
+        
+    #     if self.down and 

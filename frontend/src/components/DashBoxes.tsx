@@ -4,7 +4,7 @@ import VideoFile from "./VideoFile";
 
 const DashBoxes: React.FC = () => {
   return (
-    <div className="container">
+    <div className="dashBoxesContainer">
       <div className="middle-row">
         <div className="middle-column">
           <div className="top-box">

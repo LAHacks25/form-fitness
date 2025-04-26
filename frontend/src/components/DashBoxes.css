@@ -1,4 +1,4 @@
-.container {
+.dashBoxesContainer {
   display: flex;
   flex-direction: column;
   gap: 20px; /* Space between rows */

@@ -1,7 +1,26 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, Response
+from camera import Camera
+import cv2
 
 main = Blueprint('main', __name__)
 
 @main.route('/api/ping', methods=['GET'])
 def ping():
     return jsonify({'message': 'pong from Flask!'})
+
+def gen_frames():
+    cam = Camera()
+    for frame in cam:
+        success, jpeg = cv2.imencode('.jpg', frame)
+        if not success:
+            continue
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' +
+               jpeg.tobytes() + b'\r\n')
+
+@main.route('/api/video_feed')
+def video_feed():
+    return Response(
+        gen_frames(),
+        mimetype='multipart/x-mixed-replace; boundary=frame'
+    )

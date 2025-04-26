@@ -12,12 +12,12 @@ const Login = () => {
           gym-goers to help them achieve their fitness goals. Let us help you
           take your fitness to the next level.
         </p>
-        <p>
-          Don't have an account? <NavLink to="/">Sign up here</NavLink>
-        </p>
       </div>
       <div className="authForm">
         <AuthForm signingUp={false} />
+        <p className="signupPrompt">
+          Don't have an account? <NavLink to="/">Sign up here</NavLink>
+        </p>
       </div>
     </div>
   );

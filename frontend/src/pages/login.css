@@ -61,4 +61,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.signupPrompt {
+  width: 40%;
 }

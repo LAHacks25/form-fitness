@@ -109,3 +109,19 @@ def update_profile():
         )
 
     return jsonify({'message': 'Profile updated successfully'}), 200
+
+@auth.route('/check_auth', methods=['GET'])
+def check_auth():
+    if current_user.is_authenticated:
+        return jsonify({
+            'authenticated': True,
+            'user': {
+                'id': current_user.id,
+                'email': current_user.email,
+                'username': getattr(current_user, 'username', None)
+            }
+        }), 200
+    else:
+        return jsonify({
+            'authenticated': False
+        }), 200

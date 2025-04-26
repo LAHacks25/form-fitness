@@ -1,3 +1,16 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opactiy: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 3s ease-in-out;
+}
+
 .homeContainer {
   display: flex;
   flex-direction: column;
@@ -8,6 +21,22 @@
   margin: 0;
   background-color: var(--light-color);
   overflow: hidden;
+  background-image: url("../assets/homegym.png");
+  background-size: cover;
+  background-position: center 80%;
+  image-rendering: smooth;
+}
+
+.homeContainer::before {
+  content: ""; /* Required to create the pseudo-element */
+  position: absolute; /* Position it over the container */
+  margin-top: 2.5%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1; /* Ensure the overlay is on top of the background */
 }
 
 .row {
@@ -21,17 +50,22 @@
 
 .title {
   display: flex;
-  width: 588px;
+  width: 100%;
   height: 120px;
-  background: var(--pimary-background);
-  border-radius: 30px;
   justify-content: center;
   align-items: center;
   font-size: 64px;
-  font-family: Poppins;
+  font-family: Lato;
   font-weight: 600;
-  margin-top: 38px;
-  margin-bottom: 24px;
+  margin-bottom: 100px;
+  padding: 20px 0;
+  gap: 15px;
+  z-index: 2;
+  background: var(--light-color);
+}
+
+.titleText {
+  font-family: var(--primary-font);
 }
 
 .bottomBox {
@@ -41,7 +75,31 @@
   height: 250px;
   background: #ffffff;
   border-radius: 30px;
-  margin-top: 30px;
+  margin-top: 50px;
+}
+
+.bottom {
+  height: 200px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  margin-top: 300px;
+  justify-content: center;
+  align-items: center;
+  background: var(--light-color);
+  align-self: flex-end;
+  margin-bottom: 0;
+  position: fixed;
+  bottom: 0;
+}
+
+.desc {
+  text-align: center;
+  color: var(--dark-color);
+  font-family: var(--primary-font);
+  width: 60%;
+  margin-top: 25px;
+  font-size: 16px;
 }
 
 .nav {
@@ -49,8 +107,8 @@
   height: 65px;
   border-radius: 20px;
   background: var(--dark-color);
-  margin-top: 300px;
-  font-family: Poppins;
+  margin-top: 50px;
+  font-family: Lato;
   color: #ffffff;
   border-width: 0;
   display: flex;
@@ -58,4 +116,6 @@
   align-items: center;
   text-decoration: none;
   font-size: 28px;
+  z-index: 2;
+  margin-bottom: 40px;
 }

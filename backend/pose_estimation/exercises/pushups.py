@@ -1,6 +1,6 @@
 import numpy as np
-from exercises.Exercise import Exercise
-from utils.angle import angle
+from pose_estimation.exercises.Exercise import Exercise
+from pose_estimation.utils.angle import angle
 from collections import deque
 
 class Pushups(Exercise):
@@ -26,7 +26,7 @@ class Pushups(Exercise):
         self.perceiver.detect(frame)
 
         if self.side is None:
-            if not self.verify:
+            if not self.verify():
                 return {'grade': 0, 'reps': self.reps, 'clear':False}
 
         theta = self.grade()
@@ -35,7 +35,7 @@ class Pushups(Exercise):
 
         self.update_reps(frame)
 
-        formGrade = 1 if smoothTheta >= 129 else 0
+        formGrade = 'GOOD' if smoothTheta >= 129 else 'BAD'
 
         return {
             'grade': formGrade,

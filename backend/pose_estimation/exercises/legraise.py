@@ -1,6 +1,6 @@
 import numpy as np
-from exercises.Exercise import Exercise
-from utils.angle import angle
+from pose_estimation.exercises.Exercise import Exercise
+from pose_estimation.utils.angle import angle
 from collections import deque, Counter
 
 class LegRaise(Exercise):

@@ -1,8 +1,12 @@
+"""
+DO NOT USE IN PROJECT IMPLEMENTATION
+THIS IS AN EXAMPLE IMPLEMENTATION OF EXERCISE CLASSES
+"""
 import cv2
 import numpy as np
-from exercises.legraise import LegRaise
-from Perceiver import Perciever
-from utils.drawer import draw
+from pose_estimation.exercises.legraise import LegRaise
+from pose_estimation.Perceiver import Perciever
+from pose_estimation.utils.drawer import draw
 from collections import deque, Counter
 
 cap = cv2.VideoCapture('/Users/kvaikunthan/Desktop/form-fitness/backend/pose_estimation/IMG_5643.MOV')
@@ -23,7 +27,7 @@ while cap.isOpened():
     data = lr.process(frame)
 
     disp = cv2.putText(disp, data['grade'], (50, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
-    # disp = cv2.putText(disp, f"Leg Raises: {data['reps']}", (300, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+    disp = cv2.putText(disp, f"Leg Raises: {data['reps']}", (300, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
     if hasattr(lr, 'points'):
         disp = draw(disp, lr.points)
     

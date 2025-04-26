@@ -185,3 +185,7 @@ dependencies:
       - tensorflow-hub==0.16.1
       - tensorflow-io-gcs-filesystem==0.37.1
       - tf-keras==2.19.0
+      - flask-login
+      - flask-bcrypt
+      - pymongo
+      - python-dotenv

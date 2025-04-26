@@ -6,6 +6,7 @@ class Camera:
     def __init__(self, src=0):
         self.cap = cv2.VideoCapture(src)
         self.pu = Pushups(Perciever())
+        self.latest_data = {'grade': '', 'reps': 0}
     def __iter__(self):
         return self
     def __next__(self):
@@ -18,6 +19,7 @@ class Camera:
         
         disp = frame.copy()
         data = self.pu.process(frame)
+        self.latest_data = data
 
         disp = cv2.putText(disp, data['grade'], (50, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
         disp = cv2.putText(disp, f"Reps: {data['reps']}", (300, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)

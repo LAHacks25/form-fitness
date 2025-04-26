@@ -1,15 +1,20 @@
-html,
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%; /* Ensure that html and body take up the full height of the screen */
-  overflow: hidden;
+  font-family: "Quicksand", sans-serif;
+}
+
+html,
+body {
+  background-color: #bcdad3; /* Sets the entire page background color */
+  height: 100%; /* Ensures the background covers the full height */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+  box-sizing: border-box;
 }
 
 #root {
-  width: 100%; /* Take full width */
-  height: 100%; /* Take full height */
-  display: flex; /* You may want to use flex to control layout */
-  flex-direction: column; /* Optional: Define layout for child elements */
+  height: 100%;
+  width: 100%;
 }

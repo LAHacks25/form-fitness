@@ -7,7 +7,7 @@ import "./home.css";
 
 export default function Home() {
   return (
-    <div className="container">
+    <div className="homeContainer">
       <NavBar />
       <div className="title">
         <img src={logo} className="logo" />

@@ -1,4 +1,9 @@
-.container {
+.loginContainer {
   margin: 0;
   padding: 0;
+  display: flex;
+}
+
+.left p {
+  color: var(--light-color);
 }

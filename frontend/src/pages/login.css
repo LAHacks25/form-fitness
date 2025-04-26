@@ -23,6 +23,7 @@
   background-position: center;
   image-rendering: smooth;
   padding-bottom: 50px;
+  gap: 20px;
 }
 
 .left::before {
@@ -57,13 +58,16 @@
 }
 
 .authForm {
-  width: 40%;
+  width: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 0 auto;
+  gap: 0;
 }
 
 .signupPrompt {
-  width: 40%;
+  margin: 0;
+  padding: 0;
 }

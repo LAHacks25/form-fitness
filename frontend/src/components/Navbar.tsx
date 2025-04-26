@@ -11,11 +11,11 @@ export const NavBar = () => {
             <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/dashboard">Form Checker</NavLink>
           </li>
 
           <li>
-            <NavLink to="/">Temp</NavLink>
+            <NavLink to="/">Workout Tracker</NavLink>
           </li>
         </div>
         <li>

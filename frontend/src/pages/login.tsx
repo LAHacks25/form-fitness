@@ -16,7 +16,7 @@ const Login = () => {
       <div className="authForm">
         <AuthForm signingUp={false} />
         <p className="signupPrompt">
-          Don't have an account? <NavLink to="/">Sign up here</NavLink>
+          Don't have an account? <NavLink to="/signup">Sign up here</NavLink>
         </p>
       </div>
     </div>

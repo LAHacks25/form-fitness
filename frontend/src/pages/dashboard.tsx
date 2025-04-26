@@ -4,9 +4,13 @@ import DashBoxes from "../components/DashBoxes";
 
 const Dashboard: React.FC = () => {
   return (
-    <div>
-      <SideBar />
-      <DashBoxes />
+    <div style={{ display: "flex" }}>
+      <div style={{ width: "14%" }}>
+        <SideBar />
+      </div>
+      <div style={{ width: "86%" }}>
+        <DashBoxes />
+      </div>
     </div>
   );
 };

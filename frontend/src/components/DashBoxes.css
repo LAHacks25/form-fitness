@@ -1,13 +1,11 @@
-body {
-  background-color: #e5e7eb; /* Light background like in the image */
-  margin: 0;
-  font-family: sans-serif;
-}
-
 .container {
   display: flex;
   flex-direction: column;
   gap: 20px; /* Space between rows */
+  background-color: #e5e7eb; /* Light background like in the image */
+  margin: 0;
+  font-family: sans-serif;
+  padding: 20px; /* Space around the container */
 }
 
 .box {

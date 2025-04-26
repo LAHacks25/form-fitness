@@ -7,18 +7,16 @@ import "./home.css";
 
 export default function Home() {
   return (
-    <div className="container">
+    <div className="homeContainer">
       <NavBar />
       <div className="title">
         <img src={logo} className="logo" />
         <p className="titleText">FORM FITNESS</p>
       </div>
       <Carousel />
-      <div className="bottomBox">
-        <NavLink className="nav" to="/dashboard">
-          Get Started
-        </NavLink>
-      </div>
+      <NavLink className="nav" to="/dashboard">
+        Get Started
+      </NavLink>
     </div>
   );
 }

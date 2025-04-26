@@ -4,9 +4,14 @@ import numpy as np
 class Exercise:
     def __init__(self, perceiver):
         self.keypoints = {}
+        self.perceiver = perceiver
+        self.bestKps = None
     
-    def verify(self, frame):
+    def determineSide(self, frame):
         raise NotImplementedError('Must implement with child class.')
     
     def grade(self, frame):
+        raise NotImplementedError('Must implement with child class.')
+    
+    def countReps(self, *args):
         raise NotImplementedError('Must implement with child class.')

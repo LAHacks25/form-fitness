@@ -1,0 +1,102 @@
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 256px;
+    height: 100vh;
+    background-color: white;
+    border-right: 1px solid #e5e7eb;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .logo-container {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logo-icon {
+    width: 24px;
+    height: 24px;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo-dot {
+    width: 6px;
+    height: 6px;
+    background-color: black;
+    border-radius: 50%;
+  }
+  
+  .logo-text {
+    font-weight: bold;
+    font-size: 20px;
+    font-color: black;
+  }
+  
+  .logo-separator {
+    color: black;
+  }
+  
+  .menu {
+    padding: 0 24px;
+  }
+  
+  .menu-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #6c3bee;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .menu-icon {
+    font-size: 16px;
+  }
+  
+  .user-info {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+
+  }
+  
+  .user-details {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #7D3C3C;
+    border-radius: 50%;
+  }
+  
+  .user-name {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .dropdown-icon {
+    color: #9ca3af;
+    font-size: 16px;
+  }
+  

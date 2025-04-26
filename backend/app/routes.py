@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, Response
+from flask import Blueprint, jsonify, request, Response, current_app
 from camera import Camera
 import cv2
 
@@ -24,3 +24,13 @@ def video_feed():
         gen_frames(),
         mimetype='multipart/x-mixed-replace; boundary=frame'
     )
+
+@main.route('/api/mongowrite', methods=['POST'])
+def mongowrite():
+    data = request.get_json()
+    db = current_app.mongo_client['workouts']
+    collection = db['workouts']
+    result = collection.insert_one(data)
+    
+    return jsonify({'inserted_id': str(result.inserted_id)}), 201
+

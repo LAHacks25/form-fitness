@@ -1,0 +1,6 @@
+.image {
+  width: 436px;
+  height: 275px;
+  background: var(--light-color);
+  border-radius: 30px;
+}

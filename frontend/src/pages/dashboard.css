@@ -1,0 +1,60 @@
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+
+.selectionContainer {
+  width: 1000px;
+  height: 700px;
+  background: var(--light-color);
+  position: absolute;
+  left: 15%;
+  top: 7%;
+  z-index: 3;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.exerciseImage {
+  width: 80%;
+  height: 50%;
+  border-width: 0;
+}
+
+.instruction {
+  font-family: var(--primary-font);
+  font-size: 54px;
+  margin-bottom: auto;
+  margin-top: 25px;
+}
+
+.dropdown {
+  width: 60%;
+  height: 50px;
+}
+
+.submitButton {
+  margin-bottom: 25px;
+}
+
+.dashboardContainer.overlay::before {
+  content: ""; /* Required to create the pseudo-element */
+  position: absolute; /* Position it over the container */
+  margin-top: 2.5%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+  z-index: 1; /* Ensure the overlay is on top of the background */
+}
+
+.hidden {
+  opacity: 0;
+}

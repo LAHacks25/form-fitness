@@ -2,18 +2,18 @@ import React from "react";
 import "./DashBoxes.css";
 import VideoFile from "./VideoFile";
 
-const DashBoxes: React.FC = () => {
+interface DashBoxesProps {
+  exercise: string;
+}
+
+const DashBoxes: React.FC<DashBoxesProps> = ({ exercise }) => {
   return (
     <div className="dashBoxesContainer">
-      <div className="middle-row">
-        <div className="middle-column">
-          <div className="top-box">
-            <VideoFile />
-          </div>
-          <div className="bottom-box"></div>
-        </div>
-        <div className="right-box"></div>
+      <div className="video">
+        <p className="selection">{`You are recording ${exercise}`}</p>
+        <VideoFile />
       </div>
+      <div className="right-box"></div>
     </div>
   );
 };

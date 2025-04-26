@@ -86,7 +86,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ signingUp }) => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <h1>{signingUp ? "User Signup" : "User Login"}</h1>
+      <h1>{signingUp ? "Signup" : "Login"}</h1>
       <input
         type="email"
         placeholder="Email"

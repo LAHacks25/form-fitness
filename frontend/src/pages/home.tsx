@@ -1,6 +1,8 @@
 import { NavBar } from "../components/Navbar";
 import Image from "../components/Image";
 import logo from "../assets/logo.svg";
+import Carousel from "../components/Carousel";
+import { NavLink } from "react-router-dom";
 
 import "./home.css";
 
@@ -12,13 +14,11 @@ export default function Home() {
         <img src={logo} className="logo" />
         <p className="titleText">FORM FITNESS</p>
       </div>
-      <div className="row">
-        <Image src=""></Image>
-        <Image src=""></Image>
-        <Image src=""></Image>
-      </div>
+      <Carousel />
       <div className="bottomBox">
-        <button>Get Started</button>
+        <NavLink className="nav" to="/dashboard">
+          Get Started
+        </NavLink>
       </div>
     </div>
   );

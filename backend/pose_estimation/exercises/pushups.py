@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
-from exercises.Exercise import Exercise
-from utils.angle import angle
+from .Exercise import Exercise
+from ..utils.angle import angle
 
 class Pushups(Exercise):
     def __init__(self, perceiver):

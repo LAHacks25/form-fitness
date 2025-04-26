@@ -15,4 +15,35 @@ class Perciever:
 
         marked = self.model.signatures['serving_default'](tf.constant(arr))
 
-        self.keypoints = marked['output_0']
+        self.keypoints = marked['output_0'].numpy()
+
+        return self
+    
+    def collect(self, indices):
+        if self.keypoints is None:
+            raise Exception('Must detect keypoints first.')
+        
+        selected = [self.keypoints[0, 0, idx] for idx in indices]
+
+        return np.array(selected)
+
+if __name__=='__main__':
+    from utils.drawer import draw
+    cap = cv2.VideoCapture(0)
+    model = Perciever()
+
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            print('Unable to retrieve from webcam.')
+            break
+
+        frame = cv2.flip(frame, 1)
+
+        model.detect(frame)
+        kps = model.collect(list(range(17)))
+        disp = draw(frame, kps)
+
+        cv2.imshow('hi', disp)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break

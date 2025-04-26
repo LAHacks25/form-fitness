@@ -1,4 +1,4 @@
-.container {
+.homeContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,7 +6,7 @@
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: var(--primary-background);
+  background-color: var(--light-color);
   overflow: hidden;
 }
 
@@ -48,9 +48,14 @@
   width: 251px;
   height: 65px;
   border-radius: 20px;
-  background: linear-gradient(108deg, #eaabf0 7.37%, #795df5 70%);
-  margin-top: 150px;
+  background: var(--dark-color);
+  margin-top: 300px;
   font-family: Poppins;
   color: #ffffff;
   border-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: 28px;
 }

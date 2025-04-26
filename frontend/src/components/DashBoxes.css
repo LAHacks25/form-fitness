@@ -1,13 +1,12 @@
-body {
-  background-color: #e5e7eb; /* Light background like in the image */
-  margin: 0;
-  font-family: sans-serif;
-}
-
-.container {
+.dashBoxesContainer {
   display: flex;
   flex-direction: column;
   gap: 20px; /* Space between rows */
+  background-color: #e5e7eb; /* Light background like in the image */
+  margin: 0;
+  font-family: sans-serif;
+  padding: 20px; /* Space around the container */
+  height: 100%;
 }
 
 .box {
@@ -21,15 +20,15 @@ body {
   background-color: white;
   border-radius: 20px;
   padding: 20px;
-  height: 700px; /* Adjust as needed */
+  height: 725px; /* Adjust as needed */
   width: 1250px;
 }
 .bottom-box {
   background-color: white;
   border-radius: 20px;
   padding: 70px;
-  height: 120px; /* Adjust as needed */
-  width: 1150px;
+  height: 290px; /* Adjust as needed */
+  width: 1250px;
 }
 
 .middle-row {
@@ -48,7 +47,7 @@ body {
   background-color: white;
   border-radius: 20px;
   padding: 70px;
-  height: 885px; /* Adjust as needed */
+  height: 1030px; /* Adjust as needed */
   width: 100px;
   flex: 1;
   display: flex;

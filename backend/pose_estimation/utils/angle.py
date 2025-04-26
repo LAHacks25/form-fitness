@@ -11,4 +11,3 @@ def angle(a, b, c):
     cosTheta = np.dot(v, w) / (np.linalg.norm(v) * np.linalg.norm(w))
     theta = np.arccos(np.clip(cosTheta, -1, 1))
 
-    return np.degrees(theta)

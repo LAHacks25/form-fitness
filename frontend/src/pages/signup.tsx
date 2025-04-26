@@ -1,8 +1,8 @@
 import AuthForm from "../components/AuthForm";
 import { NavLink } from "react-router-dom";
-import "./login.css";
+import "./signup.css";
 
-const Login = () => {
+const Signup = () => {
   return (
     <div className="loginContainer">
       <div className="left">
@@ -14,13 +14,13 @@ const Login = () => {
         </p>
       </div>
       <div className="authForm">
-        <AuthForm signingUp={false} />
+        <AuthForm signingUp={true} />
         <p className="signupPrompt">
-          Don't have an account? <NavLink to="/signup">Sign up here</NavLink>
+          Already have an account? <NavLink to="/login">Log in here</NavLink>
         </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

@@ -16,6 +16,8 @@ def create_app():
         print('Successfully connected to MongoDB')
     except Exception as e:
         print(e)
+
+    app.mongo_client = client
     
     CORS(app)  # Enable CORS for all domains
 

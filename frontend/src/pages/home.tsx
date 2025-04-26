@@ -15,11 +15,9 @@ export default function Home() {
         <p className="titleText">FORM FITNESS</p>
       </div>
       <Carousel />
-      <div className="bottomBox">
-        <NavLink className="nav" to="/dashboard">
-          Get Started
-        </NavLink>
-      </div>
+      <NavLink className="nav" to="/dashboard">
+        Get Started
+      </NavLink>
     </div>
   );
 }

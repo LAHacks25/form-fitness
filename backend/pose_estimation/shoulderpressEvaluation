@@ -1,0 +1,48 @@
+import cv2
+import numpy as np
+from exercises.shoulderpress import Shoulderpress
+from Perceiver import Perciever
+from utils.drawer import draw
+from collections import deque
+
+cap = cv2.VideoCapture(0)
+model = Perciever()
+pu = Shoulderpress(model)
+
+window = deque(maxlen=30)
+
+DOWN_THRESHOLD = 90
+UP_THRESHOLD = 160
+bottom_reached = False
+total_reps = 0
+good_reps = 0
+bottom_angle = 0
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        print('Unable to retrieve from webcam.')
+        break
+
+    frame = cv2.flip(frame, 1)
+    disp = frame.copy()
+
+    currentAngle, pts = pu.grade(frame)
+
+    if not bottom_reached and currentAngle <= UP_THRESHOLD - 30: # checking for any attempt, good or bad
+        bottom_reached = True
+        bottom_angle = currentAngle
+
+    if bottom_reached and currentAngle >= UP_THRESHOLD - 30: # can change this threshold of 30
+        total_reps += 1
+        if bottom_angle <= DOWN_THRESHOLD: # checking if we're going all the way down
+            good_reps += 1
+        bottom_reached = False
+
+  
+    disp = cv2.putText(disp, f"Good Reps: {good_reps:.2f}", (50, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+    disp = draw(disp, pts)
+    
+    cv2.imshow('hi', disp)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break

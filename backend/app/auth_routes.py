@@ -15,8 +15,7 @@ def register():
     # Extract user data
     email = data.get('email')
     password = data.get('password')
-    username = data.get('uername', '')
-    
+
     # Get the MongoDB connection from app
     users_collection = current_app.mongo_client['FormFitness']['users']
     
@@ -31,7 +30,6 @@ def register():
     new_user = {
         'email': email,
         'password': hashed_password,
-        'username': username,
     }
     
     # Insert user
@@ -46,7 +44,6 @@ def register():
         'message': 'Registration successful',
         'user_id': str(result.inserted_id),
         'email': email,
-        'username': username
     }), 201
 
 @auth.route('/login', methods=['POST'])

@@ -4,6 +4,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%; /* Ensure that html and body take up the full height of the screen */
+  overflow: hidden;
 }
 
 #root {

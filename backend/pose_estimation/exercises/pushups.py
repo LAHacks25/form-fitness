@@ -27,7 +27,7 @@ class Pushups(Exercise):
 
         if self.side is None:
             if not self.verify():
-                return {'grade': 0, 'reps': self.reps, 'clear':False}
+                return {'grade': 'BAD', 'reps': self.reps, 'clear':False}
 
         theta = self.grade()
         self.smoothingWindow.append(theta)

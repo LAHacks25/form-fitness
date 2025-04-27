@@ -1,3 +1,12 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opactiy: 1;
+  }
+}
+
 .dashboardContainer {
   display: flex;
   flex-direction: column;
@@ -5,10 +14,21 @@
   height: 100%;
 }
 
+.imageBackground {
+  background-image: url("../assets/gym.webp");
+  background-size: cover;
+  background-position: center 80%;
+  image-rendering: smooth;
+}
+
+.solidBackground {
+  background-color: var(--dark-color);
+}
+
 .selectionContainer {
-  width: 80%; /* Use a percentage to make it responsive */
+  width: 20%; /* Use a percentage to make it responsive */
   max-width: 1000px; /* Keep the max width as your previous value */
-  height: 70vh; /* Use viewport height for responsiveness */
+  height: 40vh; /* Use viewport height for responsiveness */
   background: var(--light-color);
   position: absolute;
   left: 50%;
@@ -23,17 +43,13 @@
   gap: 25px;
 }
 
-.exerciseImage {
-  width: 50%;
-  height: 50%;
-  border-width: 0;
-}
-
 .instruction {
   font-family: var(--primary-font);
-  font-size: 54px;
+  font-size: 32px;
   margin-bottom: auto;
-  margin-top: 25px;
+  margin-top: 50px;
+  text-align: center;
+  padding: 0 10px;
 }
 
 .dropdown {
@@ -54,9 +70,9 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
-  z-index: 1; /* Ensure the overlay is on top of the background */
+  z-index: 3; /* Ensure the overlay is on top of the background */
 }
 
 .hidden {
-  opacity: 0;
+  display: none;
 }

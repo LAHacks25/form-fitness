@@ -1,17 +1,19 @@
 import numpy as np
 from pose_estimation.exercises.Exercise import Exercise
 from pose_estimation.utils.angle import angle
-from collections import deque
+from collections import deque, Counter
 
-class Pushups(Exercise):
+class LegRaise(Exercise):
     def __init__(self, perceiver):
         super().__init__(perceiver) 
 
         self.keypoints = {
-            'left': [5, 11, 15],    # shoulder, hip, ankle
-            'right': [6, 12, 16],
-            'countL': [5, 9],       # shoulder, wrist
-            'countR': [6, 10]
+            'leftAlpha': [5, 11, 13], # shoulder, hip, knee
+            'rightAlpha': [6, 12, 14],
+            'leftBeta': [11, 13, 15],    # hip, knee, ankle
+            'rightBeta': [12, 14, 16],
+            'countL': [5, 13],       # shoulder, wrist
+            'countR': [6, 14]
         }
         
         self.side = None
@@ -21,13 +23,14 @@ class Pushups(Exercise):
         self.down = False
 
         self.smoothingWindow = deque(maxlen=15)
+        self.memory = deque(maxlen=20)
 
     def process(self, frame):
         self.perceiver.detect(frame)
 
         if self.side is None:
             if not self.verify():
-                return {'grade': 'BAD', 'reps': self.reps, 'clear':False}
+                return {'grade': 0, 'reps': self.reps, 'clear':False}
 
         theta = self.grade()
         self.smoothingWindow.append(theta)
@@ -35,7 +38,9 @@ class Pushups(Exercise):
 
         self.update_reps(frame)
 
-        formGrade = 'GOOD' if smoothTheta >= 129 else 'BAD'
+        self.memory.append('GOOD' if smoothTheta >= 105 else 'BAD')
+
+        formGrade = Counter(self.memory).most_common(1)[0][0]
 
         return {
             'grade': formGrade,
@@ -44,24 +49,31 @@ class Pushups(Exercise):
         }
 
     def verify(self):
-        left = self.perceiver.collect(self.keypoints['left'])
-        right = self.perceiver.collect(self.keypoints['right'])
+        left = self.perceiver.collect(self.keypoints['leftBeta'])
+        right = self.perceiver.collect(self.keypoints['rightBeta'])
 
         leftC = np.mean([kp[2] for kp in left])
         rightC = np.mean([kp[2] for kp in right])
 
         if leftC > rightC:
-            self.bestKps = self.keypoints['left']
+            self.bestKps = [self.keypoints['leftAlpha'], self.keypoints['leftBeta']]
             self.side = 'L'
         else:
-            self.bestKps = self.keypoints['right']
+            self.bestKps = [self.keypoints['rightAlpha'], self.keypoints['rightBeta']]
             self.side = 'R'
 
         return leftC >= 0.3 or rightC >= 0.3
 
     def grade(self):
-        points = self.perceiver.collect(self.bestKps)
-        return angle(*points)
+        self.alphaPoints = self.perceiver.collect(self.bestKps[0])
+        self.betaPoints = self.perceiver.collect(self.bestKps[1])
+
+        alphaAngle = angle(*self.alphaPoints)
+        betaAngle = angle(*self.betaPoints)
+        
+        angles = map(lambda x: angle(*x), map(self.perceiver.collect, self.bestKps))
+        print(f"ALPHA: {alphaAngle}, BETA: {betaAngle}")
+        return angle(*self.betaPoints)
 
     def update_reps(self, frame):
         h, w, _ = frame.shape

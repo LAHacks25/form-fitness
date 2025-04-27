@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request, Response, current_app, stream_with_context
+from flask_login import login_required, current_user
+from bson.objectid import ObjectId
 from camera import Camera
 import cv2
 import time
@@ -33,13 +35,25 @@ def stop_camera():
     return jsonify({'message': 'Camera stopped'}), 200
 
 @main.route('/api/mongowrite', methods=['POST'])
+@login_required
 def mongowrite():
     data = request.get_json()
-    db = current_app.mongo_client['workouts']
-    collection = db['workouts']
-    result = collection.insert_one(data)
+
+    workout_id = ObjectId()
+
+    workout = {
+        '_id': workout_id,
+        'title': data.get('title'),
+        'date':  data.get('date'),
+        'exercises': data.get('exercises', []),
+    }
+    users = current_app.mongo_client['FormFitness']['users']
+    users.update_one(
+        {'_id': ObjectId(current_user.id)},
+        {'$set': {f'workouts.{workout_id}': workout}}
+    )
     
-    return jsonify({'inserted_id': str(result.inserted_id)}), 201
+    return jsonify({'inserted_id': str(workout_id)}), 201
 
 @main.route('/api/pushup_data_stream')
 def pushup_data_stream():

@@ -7,10 +7,7 @@ def draw(frame, keypoints, threshold=0.3):
     for kp in keypoints:
         y, x, c = kp
 
-        if c > threshold:
-            cx = int(x * w)
-            cy = int(y * h)
-            cv2.circle(disp, (cx, cy), 5, (0, 255, 0), -1)
+        cv2.circle(disp, (int(x), int(y)), 5, (0, 255, 0), -1)
     
     return disp
 

@@ -34,8 +34,12 @@ while cap.isOpened():
 
     disp = cv2.putText(disp, data['grade'], (50, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
     disp = cv2.putText(disp, f"Reps: {data['reps']}", (300, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+    disp = cv2.putText(disp, f"Good reps: {data['goodReps']}", (450, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+
     if hasattr(exercise, 'points'):
         disp = draw(disp, exercise.points)
+    
+    disp = cv2.resize(disp, (960, 540))
     
     cv2.imshow('hi', disp)
     if cv2.waitKey(1) & 0xFF == ord('q'):

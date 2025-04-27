@@ -19,13 +19,19 @@ class Perciever:
 
         return self
     
-    def collect(self, indices):
+    def collect(self, indices, frameShape=None):
         if self.keypoints is None:
             raise Exception('Must detect keypoints first.')
         
         selected = [self.keypoints[0, 0, idx] for idx in indices]
+        selected = np.array(selected)
 
-        return np.array(selected)
+        if frameShape:
+            h, w = frameShape[:2]
+            selected[:, 0] *= h  # y * height
+            selected[:, 1] *= w  # x * width
+
+        return selected
 
 if __name__=='__main__':
     from utils.drawer import draw

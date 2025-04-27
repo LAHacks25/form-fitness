@@ -17,7 +17,9 @@ class Pushups(Exercise):
         self.side = None
         self.bestKps = None
 
+        self.formGrade = 'BAD'
         self.reps = 0
+        self.goodReps = 0
         self.down = False
 
         self.smoothingWindow = deque(maxlen=15)
@@ -28,19 +30,20 @@ class Pushups(Exercise):
 
         if self.side is None:
             if not self.verify():
-                return {'grade': 'BAD', 'reps': self.reps, 'clear':False}
+                return {'grade': 'BAD', 'reps': self.reps, 'goodReps':self.goodReps, 'clear':False}
 
-        theta = self.grade()
+        theta = self.grade(frame)
         self.smoothingWindow.append(theta)
         smoothTheta = np.mean(self.smoothingWindow)
 
+
+        self.formGrade = 'GOOD' if smoothTheta >= 156 else 'BAD'
         self.update_reps(frame)
 
-        formGrade = 'GOOD' if smoothTheta >= 129 else 'BAD'
-
         return {
-            'grade': formGrade,
+            'grade': self.formGrade,
             'reps': self.reps,
+            'goodReps': self.goodReps,
             'clear':True
         }
 
@@ -69,10 +72,10 @@ class Pushups(Exercise):
             overall_conf = right_total_conf
 
         # Return True if chosen side is confident enough
-        return overall_conf >= 0.3
+        return overall_conf >= 0.5
 
-    def grade(self):
-        self.points = self.perceiver.collect(self.bestKps)
+    def grade(self, frame):
+        self.points = self.perceiver.collect(self.bestKps, frame.shape)
         return angle(*self.points)
 
     def update_reps(self, frame):
@@ -90,11 +93,12 @@ class Pushups(Exercise):
         self.countDist.append(np.linalg.norm(shoulder_xy - wrist_xy))
         dist = np.mean(self.countDist)
 
-        print(dist)
-
         if dist < 129:
             if not self.down:
+                if self.formGrade == 'GOOD':
+                    self.goodReps += 1
                 self.reps += 1
                 self.down = True
         else:
             self.down = False
+        

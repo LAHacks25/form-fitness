@@ -20,7 +20,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ signingUp }) => {
 
   const handleSubmitSignup = async (email: string, password: string) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/auth/register`, {
+      const response = await fetch(`/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

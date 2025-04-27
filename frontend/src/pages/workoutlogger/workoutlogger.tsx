@@ -1,111 +1,111 @@
-import React, { useState } from 'react'
-import { FiPlus, FiX, FiSearch, FiChevronDown } from 'react-icons/fi'
-import { v4 as uuidv4 } from 'uuid'
-import './WorkoutLogger.css'
+import React, { useState } from "react";
+import { FiPlus, FiX, FiSearch, FiChevronDown } from "react-icons/fi";
+import { v4 as uuidv4 } from "uuid";
+import { NavBar } from "../../components/Navbar";
+import "./WorkoutLogger.css";
 
 interface ExerciseEntry {
-  exercise: string
-  sets: number
-  reps: number
+  exercise: string;
+  sets: number;
+  reps: number;
 }
 interface Workout {
-  id: string
-  title: string
-  exercises: ExerciseEntry[]
-  date: string
+  id: string;
+  title: string;
+  exercises: ExerciseEntry[];
+  date: string;
 }
 
-const EXERCISES = ['Push Up', 'Leg Raise', 'Shoulder Press']
+const EXERCISES = ["Push Up", "Leg Raise", "Shoulder Press"];
 
 const initialWorkouts: Workout[] = [
   {
-    id: '1',
-    title: 'Example Workout',
+    id: "1",
+    title: "Example Workout",
     exercises: [
-      { exercise: 'Shoulder Press', sets: 4, reps: 12 },
-      { exercise: 'Push Up', sets: 4, reps: 12 },
+      { exercise: "Shoulder Press", sets: 4, reps: 12 },
+      { exercise: "Push Up", sets: 4, reps: 12 },
     ],
-    date: '2025-06-10',
+    date: "2025-06-10",
   },
   // …etc…
-]
+];
 
 export default function WorkoutLogger() {
-  const [workouts, setWorkouts] = useState<Workout[]>(initialWorkouts)
-  const [filter, setFilter] = useState('Last 30 days')
-  const [query, setQuery] = useState('')
-  const [showModal, setShowModal] = useState(false)
+  const [workouts, setWorkouts] = useState<Workout[]>(initialWorkouts);
+  const [filter, setFilter] = useState("Last 30 days");
+  const [query, setQuery] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const [newWorkout, setNewWorkout] = useState<Workout>({
-    id: '',
-    title: '',
+    id: "",
+    title: "",
     exercises: [],
-    date: '',
-  })
+    date: "",
+  });
 
-  const [exercise, setExercise] = useState(EXERCISES[0])
-  const [sets, setSets] = useState(1)
-  const [reps, setReps] = useState(1)
+  const [exercise, setExercise] = useState(EXERCISES[0]);
+  const [sets, setSets] = useState(1);
+  const [reps, setReps] = useState(1);
 
   function openNewWorkoutModal() {
     setNewWorkout({
       id: uuidv4(),
-      title: 'New Workout',
+      title: "New Workout",
       exercises: [],
-      date: new Date().toISOString().split('T')[0],
-    })
-    setShowModal(true)
+      date: new Date().toISOString().split("T")[0],
+    });
+    setShowModal(true);
   }
 
   function addExercise() {
-    setNewWorkout(w => ({
+    setNewWorkout((w) => ({
       ...w,
       exercises: [...w.exercises, { exercise, sets, reps }],
-    }))
-    setExercise(EXERCISES[0])
-    setSets(1)
-    setReps(1)
+    }));
+    setExercise(EXERCISES[0]);
+    setSets(1);
+    setReps(1);
   }
 
-async function saveWorkout(e: React.FormEvent) {
-    e.preventDefault()
-  
+  async function saveWorkout(e: React.FormEvent) {
+    e.preventDefault();
+
     const payload = {
       ...newWorkout,
-    }
-  
+    };
+
     try {
-      const res = await fetch('/api/mongowrite', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        credentials: 'include',
+      const res = await fetch("/api/mongowrite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        credentials: "include",
         body: JSON.stringify(payload),
-      })
-  
+      });
+
       if (!res.ok) {
-        const text = await res.text()
-        console.error('Save failed:', res.status, text)
-        return
+        const text = await res.text();
+        console.error("Save failed:", res.status, text);
+        return;
       }
-  
-      const { inserted_id } = await res.json()
-      console.log('Workout saved, new _id:', inserted_id)
-  
-      setWorkouts(ws => [
-        ...ws,
-        { ...newWorkout, id: inserted_id }
-      ])
-  
-      setShowModal(false)
+
+      const { inserted_id } = await res.json();
+      console.log("Workout saved, new _id:", inserted_id);
+
+      setWorkouts((ws) => [...ws, { ...newWorkout, id: inserted_id }]);
+
+      setShowModal(false);
     } catch (err) {
-      console.error('Network error saving workout:', err)
+      console.error("Network error saving workout:", err);
     }
   }
-  
 
-  const filtered = workouts.filter(w =>
+  const filtered = workouts.filter((w) =>
     w.title.toLowerCase().includes(query.toLowerCase())
-  )
+  );
 
   return (
     <div className="page">
@@ -119,10 +119,15 @@ async function saveWorkout(e: React.FormEvent) {
                 type="text"
                 placeholder="Search"
                 value={query}
-                onChange={e => setQuery(e.target.value)}
+                onChange={(e) => setQuery(e.target.value)}
               />
             </div>
-            <button className="filter" onClick={() => {/* show filter */}}>
+            <button
+              className="filter"
+              onClick={() => {
+                /* show filter */
+              }}
+            >
               {filter} <FiChevronDown />
             </button>
           </div>
@@ -138,7 +143,7 @@ async function saveWorkout(e: React.FormEvent) {
         </button>
 
         <ul className="list">
-          {filtered.map(w => (
+          {filtered.map((w) => (
             <li key={w.id} className="listItem">
               <div className="workoutInfo">
                 <div className="workoutTitle">{w.title}</div>
@@ -163,8 +168,8 @@ async function saveWorkout(e: React.FormEvent) {
               <input
                 className="modalTitleInput"
                 value={newWorkout.title}
-                onChange={e =>
-                  setNewWorkout(w => ({ ...w, title: e.target.value }))
+                onChange={(e) =>
+                  setNewWorkout((w) => ({ ...w, title: e.target.value }))
                 }
               />
               <button
@@ -175,47 +180,50 @@ async function saveWorkout(e: React.FormEvent) {
               </button>
             </header>
 
-
             <form className="modalForm" onSubmit={saveWorkout}>
-            <div className="exerciseRow">
-              <label>
-                Exercise  
-              <select
-                value={exercise}
-                onChange={e => setExercise(e.target.value)}
-              >
-                {EXERCISES.map(ex => (
-                  <option key={ex} value={ex}>
-                    {ex}
-                  </option>
-                ))}
-              </select>
-              </label>
+              <div className="exerciseRow">
+                <label>
+                  Exercise
+                  <select
+                    value={exercise}
+                    onChange={(e) => setExercise(e.target.value)}
+                  >
+                    {EXERCISES.map((ex) => (
+                      <option key={ex} value={ex}>
+                        {ex}
+                      </option>
+                    ))}
+                  </select>
+                </label>
 
-              <label>
-                Sets
-              <input
-                type="number"
-                min={1}
-                value={sets}
-                onChange={e => setSets(+e.target.value || 1)}
-              />
-              </label>
-            
-              <label>
-                Reps
-              <input
-                type="number"
-                min={1}
-                value={reps}
-                onChange={e => setReps(+e.target.value || 1)}
-              />
-              </label>
+                <label>
+                  Sets
+                  <input
+                    type="number"
+                    min={1}
+                    value={sets}
+                    onChange={(e) => setSets(+e.target.value || 1)}
+                  />
+                </label>
 
-              <button type="button" onClick={addExercise} className="addButton">
-                + Add Exercise
-              </button>
-            </div>
+                <label>
+                  Reps
+                  <input
+                    type="number"
+                    min={1}
+                    value={reps}
+                    onChange={(e) => setReps(+e.target.value || 1)}
+                  />
+                </label>
+
+                <button
+                  type="button"
+                  onClick={addExercise}
+                  className="addButton"
+                >
+                  + Add Exercise
+                </button>
+              </div>
               <ul className="exerciseList">
                 {newWorkout.exercises.map((ex, i) => (
                   <li key={i}>
@@ -231,5 +239,5 @@ async function saveWorkout(e: React.FormEvent) {
         </div>
       )}
     </div>
-  )
+  );
 }

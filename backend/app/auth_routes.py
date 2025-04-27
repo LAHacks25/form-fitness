@@ -46,8 +46,15 @@ def register():
         'email': email,
     }), 201
 
-@auth.route('/login', methods=['POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'GET':
+        # client should never need this for your SPA; just return a JSON error
+        return jsonify(error="Login required"), 401
+
+    # now it's POST…
+    if not request.is_json:
+        return jsonify(error="Expected application/json"), 415
     data = request.get_json()
 
     email = data.get('email')
@@ -65,7 +72,7 @@ def login():
             'message': "Login successful",
             'user_id': str(user_data['_id']),
             'email': user_data['email'],
-            'username': user_data['username']
+            # 'username': user_data['username']
         }), 200
     else:
         return jsonify({

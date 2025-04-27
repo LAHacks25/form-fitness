@@ -92,7 +92,6 @@ def profile():
     return jsonify({
         'id': current_user.id,
         'email': current_user.email,
-        'username': current_user.username,
     })
 
 @auth.route('/update_profile', methods=['PUT'])

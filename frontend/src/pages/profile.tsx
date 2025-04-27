@@ -55,14 +55,16 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="profileContainer">
+    <div className="profilePageContainer">
       <NavBar />
-      <img src={logo} />
-      <p className="welcome">{`Welcome ${email}!`}</p>
-      <p>Your Overview:</p>
-      <p>{`Total Workouts Recorded: ${totalWorkouts}`}</p>
-      <p>{`Total Reps Recorded: ${totalReps}`}</p>
-      <Logout />
+      <div className="profileContainer">
+        <img src={logo} />
+        <p className="welcome">{`Welcome ${email}!`}</p>
+        <p>Your Overview:</p>
+        <p>{`Total Workouts Recorded: ${totalWorkouts}`}</p>
+        <p>{`Total Reps Recorded: ${totalReps}`}</p>
+        <Logout />
+      </div>
     </div>
   );
 };

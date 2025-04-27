@@ -8,15 +8,15 @@ const Login = () => {
       <div className="left">
         <p className="welcome">Welcome to Form Fitness</p>
         <p className="description">
-          The premier all-in-one fitness app geared towards all levels of
-          gym-goers to help them achieve their fitness goals. Let us help you
-          take your fitness to the next level.
+          Form Fitness is designed for gym-goers of all levels, offering tools
+          to help you track progress, improve performance, and achieve your
+          fitness goals.
         </p>
       </div>
       <div className="authForm">
         <AuthForm signingUp={false} />
         <p className="signupPrompt">
-          Don't have an account? <NavLink to="/">Sign up here</NavLink>
+          Don't have an account? <NavLink to="/signup">Sign up here</NavLink>
         </p>
       </div>
     </div>

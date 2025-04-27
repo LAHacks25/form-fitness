@@ -5,21 +5,25 @@ import logo from "../assets/logo.svg";
 export const NavBar = () => {
   return (
     <nav>
+      <NavLink className="title" to="/">
+        Form Fitness
+      </NavLink>
       <ul>
-        <div className="leftItems">
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/">Temp</NavLink>
-          </li>
-        </div>
         <li>
-          <NavLink to="/login">Profile</NavLink>
+          <NavLink className="link" to="/dashboard">
+            Form Checker
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink className="link" to="/">
+            Workout Tracker
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className="link" to="/login">
+            Profile
+          </NavLink>
         </li>
       </ul>
     </nav>

@@ -16,7 +16,27 @@ const Dashboard: React.FC = () => {
     console.log(selectedExercise);
 
     if (selectedExercise !== "") {
-      setExerciseSelected(true);
+      // Send POST request
+      fetch("http://127.0.0.1:5000/api/send_string", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: selectedExercise }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Success:", data);
+          setExerciseSelected(true);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
   };
 

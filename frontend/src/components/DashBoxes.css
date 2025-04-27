@@ -49,7 +49,19 @@
 }
 
 .stopButton {
+  position: absolute;
   width: 100%;
   background-color: red;
   margin-bottom: 63px;
+  bottom: -50px;
+  left: 0;
+}
+
+.startButton {
+  position: absolute;
+  width: 100%;
+  background-color: red;
+  margin-bottom: 63px;
+  bottom: -50px;
+  left: 0;
 }

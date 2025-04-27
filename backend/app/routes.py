@@ -5,15 +5,19 @@ from camera import Camera
 import cv2
 import time
 import json
-main = Blueprint('main', __name__)
 
-cam = Camera()
+main = Blueprint('main', __name__)
+exercise = 'pushups'  # Default exercise
+cam = None  # Global variable, initially None
 
 @main.route('/api/ping', methods=['GET'])
 def ping():
     return jsonify({'message': 'pong from Flask!'})
 
 def gen_frames():
+    global cam
+    if cam is None:
+        return  # No camera to stream from
     for frame in cam:
         success, jpeg = cv2.imencode('.jpg', frame)
         if not success:
@@ -24,6 +28,9 @@ def gen_frames():
 
 @main.route('/api/video_feed')
 def video_feed():
+    global cam
+    if cam is None:
+        cam = Camera(0, exercise)  # Instantiate only when first accessed
     return Response(
         gen_frames(),
         mimetype='multipart/x-mixed-replace; boundary=frame'
@@ -31,8 +38,13 @@ def video_feed():
 
 @main.route('/api/stop_camera', methods=['GET'])
 def stop_camera():
-    cam.cap.release()
-    return jsonify({'message': 'Camera stopped'}), 200
+    global cam
+    if cam is not None:
+        cam.cap.release()
+        cam = None  # Clear the cam object
+        return jsonify({'message': 'Camera stopped'}), 200
+    else:
+        return jsonify({'message': 'Camera not running'}), 400
 
 @main.route('/api/mongowrite', methods=['POST'])
 @login_required
@@ -76,10 +88,35 @@ def mongoget():
 
 @main.route('/api/pushup_data_stream')
 def pushup_data_stream():
+    global cam
     def event_stream():
         while True:
-            data = json.dumps(cam.latest_data)  # Proper JSON!
-            yield f"data: {data}\n\n"
+            if cam is not None:
+                data = json.dumps(cam.latest_data)  # Proper JSON!
+                yield f"data: {data}\n\n"
+            else:
+                yield f"data: {json.dumps({'error': 'Camera not active'})}\n\n"
             time.sleep(1)
 
     return Response(stream_with_context(event_stream()), mimetype="text/event-stream")
+
+@main.route('/api/send_string', methods=['POST'])
+def receive_string():
+    global exercise
+    data = request.get_json()
+    if not data or 'message' not in data:
+        return jsonify({'error': 'No message provided'}), 400
+
+    received_message = data['message']
+    exercise = received_message
+    valid_exercises = ['pushups', 'legraise', 'shoulderpress']
+    print(received_message)
+
+    if received_message not in valid_exercises:
+        return jsonify({'error': 'Invalid exercise'}), 400
+
+    # Do something with the message if needed
+    # For example, log it or trigger something
+    current_app.logger.info(f"Received message: {received_message}")
+
+    return jsonify({'message': f"Received: {received_message}"}), 200

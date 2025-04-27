@@ -44,6 +44,10 @@ def create_app():
     
     CORS(app, supports_credentials=True)  # Enable CORS for all domains
 
+    # app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # Use 'None' with secure=True in production
+    # app.config['SESSION_COOKIE_HTTPONLY'] = True
+    # app.config['SESSION_COOKIE_SECURE'] = False  
+
     app.register_blueprint(main)
     app.register_blueprint(auth, url_prefix='/api/auth')
 

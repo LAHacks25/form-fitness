@@ -15,7 +15,7 @@ const VideoFeed: React.FC<VideoFeedProps> = ({ hidden }) => (
     }}
   >
     <img
-      src={"http://127.0.0.1:5000/api/video_feed"}
+      src={"/api/video_feed"}
       alt="Live camera feed"
       style={{
         width: "100%",

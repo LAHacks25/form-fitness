@@ -1,26 +1,26 @@
 import AuthForm from "../components/AuthForm";
 import { NavLink } from "react-router-dom";
-import "./login.css";
+import "./signup.css";
 
-const Login = () => {
+const Signup = () => {
   return (
     <div className="loginContainer">
       <div className="left">
         <p className="welcome">Welcome to Form Fitness</p>
         <p className="description">
-          Form Fitness is designed for gym-goers of all levels, offering tools
-          to help you track progress, improve performance, and achieve your
-          fitness goals.
+          The premier all-in-one fitness app geared towards all levels of
+          gym-goers to help them achieve their fitness goals. Let us help you
+          take your fitness to the next level.
         </p>
       </div>
       <div className="authForm">
-        <AuthForm signingUp={false} />
+        <AuthForm signingUp={true} />
         <p className="signupPrompt">
-          Don't have an account? <NavLink to="/signup">Sign up here</NavLink>
+          Already have an account? <NavLink to="/login">Log in here</NavLink>
         </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

@@ -1,13 +1,43 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opactiy: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 2.5s ease-in-out;
+}
+
 .homeContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
   background-color: var(--light-color);
   overflow: hidden;
+  background-image: url("../assets/homegym.png");
+  background-size: cover;
+  background-position: center 80%;
+  image-rendering: smooth;
+}
+
+.homeContainer::before {
+  content: ""; /* Required to create the pseudo-element */
+  position: absolute; /* Position it over the container */
+  margin-top: 2.5%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65); /* Semi-transparent black */
+  z-index: 1; /* Ensure the overlay is on top of the background */
 }
 
 .row {
@@ -17,21 +47,29 @@
 
 .logo {
   border-width: 0;
+  width: 10%;
+  height: auto;
+  border-radius: 100px;
 }
 
 .title {
   display: flex;
-  width: 588px;
+  width: 100%;
   height: 120px;
-  background: var(--pimary-background);
-  border-radius: 30px;
   justify-content: center;
   align-items: center;
-  font-size: 64px;
-  font-family: Poppins;
+  font-size: 120px;
+  font-family: Lato;
   font-weight: 600;
-  margin-top: 38px;
-  margin-bottom: 24px;
+  padding: 20px 0;
+  gap: 15px;
+  z-index: 2;
+  margin-bottom: 30px;
+}
+
+.titleText {
+  font-family: var(--primary-font);
+  color: var(--light-color);
 }
 
 .bottomBox {
@@ -41,21 +79,44 @@
   height: 250px;
   background: #ffffff;
   border-radius: 30px;
-  margin-top: 30px;
+  margin-top: 50px;
+}
+
+.bottom {
+  height: 200px;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+  margin-bottom: 0;
+}
+
+.desc {
+  text-align: center;
+  color: var(--light-color);
+  font-family: var(--primary-font);
+  width: 60%;
+  margin-top: 25px;
+  font-size: 24px;
 }
 
 .nav {
-  width: 251px;
-  height: 65px;
+  width: 300px;
+  height: 100px;
   border-radius: 20px;
-  background: var(--dark-color);
-  margin-top: 300px;
-  font-family: Poppins;
-  color: #ffffff;
+  background: var(--light-color);
+  margin-top: 50px;
+  font-family: Lato;
+  color: var(--dark-color);
   border-width: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   font-size: 28px;
+  z-index: 2;
+  margin-bottom: 40px;
 }

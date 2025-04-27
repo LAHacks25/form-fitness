@@ -3,7 +3,7 @@ import logo from "../assets/logo2.jpg";
 import Carousel from "../components/Carousel";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Chatbot from "../components/ChatBot";
+// import Chatbot from "../components/ChatBot";
 
 import "./home.css";
 
@@ -53,7 +53,6 @@ export default function Home() {
         <NavLink className="nav" to={isLoggedIn ? "/dashboard" : "/login"}>
           Get Started
         </NavLink>
-        <Chatbot />
       </div>
     </div>
   );

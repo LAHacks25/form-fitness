@@ -1,11 +1,19 @@
 import cv2
 from pose_estimation.exercises.pushups import Pushups
 from pose_estimation.Perceiver import Perciever
+from pose_estimation.exercises.legraise import LegRaise
+from pose_estimation.exercises.shoulderpress import ShoulderPress
+
+exercises = {
+    'pushups': Pushups,
+    'legraise': LegRaise,
+    'shoulderpress': ShoulderPress
+}
 
 class Camera:
-    def __init__(self, src=0):
+    def __init__(self, src=0, exercise = "pushups"):
         self.cap = cv2.VideoCapture(src)
-        self.pu = Pushups(Perciever())
+        self.my_exercise = exercises[exercise](Perciever())
         self.latest_data = {'grade': '', 'reps': 0}
     def __iter__(self):
         return self
@@ -18,7 +26,7 @@ class Camera:
             raise StopIteration
         
         disp = frame.copy()
-        data = self.pu.process(frame)
+        data = self.my_exercise.process(frame)
         self.latest_data = data
 
         disp = cv2.putText(disp, data['grade'], (50, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)

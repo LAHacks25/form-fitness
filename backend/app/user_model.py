@@ -5,6 +5,7 @@ class User(UserMixin):
     def __init__(self, user_data):
         self.id = str(user_data['_id'])
         self.email = user_data['email']
+        self.workout = user_data['workouts']
 
     @staticmethod
     def get_by_email(email, users_collection):
@@ -18,3 +19,4 @@ class User(UserMixin):
             return User(user_data) if user_data else None
         except:
             return None
+    

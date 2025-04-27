@@ -1,0 +1,22 @@
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 15px;
+}
+
+.welcome {
+  font-size: 24px;
+  font-family: var(--primary-font);
+  font-weight: 600;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  border: solid 2px black;
+  border-radius: 100px;
+}

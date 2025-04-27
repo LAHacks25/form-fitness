@@ -67,11 +67,40 @@ export default function WorkoutLogger() {
     setReps(1)
   }
 
-  function saveWorkout(e: React.FormEvent) {
+async function saveWorkout(e: React.FormEvent) {
     e.preventDefault()
-    setWorkouts(ws => [...ws, newWorkout])
-    setShowModal(false)
+  
+    const payload = {
+      ...newWorkout,
+    }
+  
+    try {
+      const res = await fetch('http://127.0.0.1:5000/api/mongowrite', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+  
+      if (!res.ok) {
+        const text = await res.text()
+        console.error('Save failed:', res.status, text)
+        return
+      }
+  
+      const { inserted_id } = await res.json()
+      console.log('Workout saved, new _id:', inserted_id)
+  
+      setWorkouts(ws => [
+        ...ws,
+        { ...newWorkout, id: inserted_id }
+      ])
+  
+      setShowModal(false)
+    } catch (err) {
+      console.error('Network error saving workout:', err)
+    }
   }
+  
 
   const filtered = workouts.filter(w =>
     w.title.toLowerCase().includes(query.toLowerCase())

@@ -47,9 +47,13 @@ export default function Home() {
         <NavLink className="nav" to={isLoggedIn ? "/dashboard" : "/login"}>
           Get Started
         </NavLink>
+<<<<<<< HEAD
         <div className="chatbot">
           <Chatbot />
         </div>
+=======
+        {/* <Chatbot /> */}
+>>>>>>> origin/main
       </div>
     </div>
   );

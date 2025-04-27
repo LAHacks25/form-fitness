@@ -75,9 +75,10 @@ async function saveWorkout(e: React.FormEvent) {
     }
   
     try {
-      const res = await fetch('http://127.0.0.1:5000/api/mongowrite', {
+      const res = await fetch('/api/mongowrite', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(payload),
       })
   

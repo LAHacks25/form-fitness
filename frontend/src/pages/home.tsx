@@ -42,13 +42,11 @@ export default function Home() {
         <img src={logo} className="logo" />
         <p className="titleText">FORM FITNESS</p>
       </div>
-      <Carousel />
       <div className="bottom">
         <p className="desc">
-          Welcome to Form Fitness – the ultimate all-in-one fitness app. Whether
-          you're tracking your workouts, improving your form with real-time
-          feedback, or connecting with a supportive community, we're here to
-          help you reach your fitness goals.
+          The all-in-one app to track workouts, improve form with real-time
+          feedback, and connect with a supportive community to reach your
+          fitness goals.
         </p>
         <NavLink className="nav" to={isLoggedIn ? "/dashboard" : "/login"}>
           Get Started

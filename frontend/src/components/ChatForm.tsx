@@ -52,7 +52,12 @@ const ChatForm: React.FC<ChatFormProps> = ({
   };
 
   return (
-    <form action="#" className="chat-form" onSubmit={handleFormSubmit}>
+    <form
+      action="#"
+      className="chat-form"
+      onSubmit={handleFormSubmit}
+      style={{ margin: "0px" }}
+    >
       <input
         ref={inputRef}
         type="text"

@@ -1,12 +1,16 @@
 import React from "react";
 
-const VideoFeed: React.FC = () => (
+interface VideoFeedProps {
+  hidden: boolean;
+}
+
+const VideoFeed: React.FC<VideoFeedProps> = ({ hidden }) => (
   <div
     style={{
       textAlign: "center",
       height: "90%",
       width: "100%",
-      marginTop: "auto",
+      marginTop: 25,
       padding: 0,
     }}
   >
@@ -19,6 +23,7 @@ const VideoFeed: React.FC = () => (
         boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         margin: 0,
         padding: 0,
+        display: hidden ? "none" : "block",
       }}
     />
   </div>

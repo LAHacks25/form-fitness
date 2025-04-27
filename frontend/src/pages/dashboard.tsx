@@ -1,45 +1,38 @@
 import React, { useState, ChangeEvent } from "react";
 import { NavBar } from "../components/Navbar";
 import DashBoxes from "../components/DashBoxes";
-import pushup from "../assets/pushup.webp";
-import situp from "../assets/situps.jpg";
-import shoulderpress from "../assets/shoulderpress.webp";
-import logo from "../assets/logo2.jpg";
 import "./dashboard.css";
 
 const Dashboard: React.FC = () => {
   const [exerciseSelected, setExerciseSelected] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState("");
-  const [selectedImage, setSelectedImage] = useState(logo);
 
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     const exercise = event.target.value;
     setSelectedExercise(exercise);
-
-    if (exercise == "pushups") {
-      setSelectedImage(pushup);
-    } else if (exercise == "situps") {
-      setSelectedImage(situp);
-    } else {
-      setSelectedImage(shoulderpress);
-    }
   };
 
   const handleSubmit = () => {
     console.log(selectedExercise);
 
-    if (selectedExercise != "") {
+    if (selectedExercise !== "") {
       setExerciseSelected(true);
     }
   };
 
   return (
-    <div className={`dashboardContainer ${exerciseSelected ? "" : "overlay"}`}>
+    <div
+      className={`dashboardContainer ${exerciseSelected ? "" : "overlay"} ${
+        exerciseSelected ? "solidBackground" : "imageBackground"
+      }`}
+    >
       <NavBar />
-      <DashBoxes exercise={selectedExercise} />
+      <DashBoxes
+        exercise={selectedExercise}
+        hidden={exerciseSelected ? false : true}
+      />
       <div className={`selectionContainer ${exerciseSelected ? "hidden" : ""}`}>
-        <p className="instruction">Select an exercise to record</p>
-        <img src={selectedImage} className="exerciseImage" />
+        <p className="instruction">Select an exercise</p>
         <select
           className="dropdown"
           value={selectedExercise}

@@ -16,7 +16,7 @@ export const NavBar = () => {
         </li>
 
         <li>
-          <NavLink className="link" to="/">
+          <NavLink className="link" to="/workouttracker">
             Workout Tracker
           </NavLink>
         </li>

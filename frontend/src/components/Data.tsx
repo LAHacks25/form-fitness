@@ -5,13 +5,15 @@ interface PushupData {
   grade: string;
 }
 
-const Data: React.FC = () => {
+interface DataProps {
+  exercise: string;
+}
+
+const Data: React.FC<DataProps> = ({ exercise }) => {
   const [data, setData] = useState<PushupData>({ reps: 0, grade: "" });
 
   useEffect(() => {
-    const eventSource = new EventSource(
-      "http://127.0.0.1:5000/api/pushup_data_stream"
-    );
+    const eventSource = new EventSource("/api/pushup_data_stream");
 
     eventSource.onmessage = (event) => {
       try {
@@ -35,7 +37,7 @@ const Data: React.FC = () => {
 
   return (
     <div>
-      <h2>Pushup Tracker</h2>
+      <h2>{exercise} Tracker</h2>
       <p>Reps: {data.reps}</p>
       <p>Grade: {data.grade}</p>
     </div>

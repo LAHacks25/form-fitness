@@ -19,7 +19,9 @@ class LegRaise(Exercise):
         self.side = None
         self.bestKps = None
 
+        self.formGrade = 'BAD'
         self.reps = 0
+        self.goodReps = 0
         self.down = False
 
         self.smoothingWindow = deque(maxlen=15)
@@ -30,21 +32,21 @@ class LegRaise(Exercise):
 
         if self.side is None:
             if not self.verify():
-                return {'grade': 0, 'reps': self.reps, 'clear':False}
+                return {'grade': 'BAD', 'reps': self.reps, 'goodReps':self.goodReps, 'clear':False}
 
-        theta = self.grade()
+        theta = self.grade(frame)
         self.smoothingWindow.append(theta)
         smoothTheta = np.mean(self.smoothingWindow)
 
+        self.memory.append('GOOD' if smoothTheta >= 145 else 'BAD')
+
+        self.formGrade = Counter(self.memory).most_common(1)[0][0]
         self.update_reps(frame)
 
-        self.memory.append('GOOD' if smoothTheta >= 105 else 'BAD')
-
-        formGrade = Counter(self.memory).most_common(1)[0][0]
-
         return {
-            'grade': formGrade,
+            'grade': self.formGrade,
             'reps': self.reps,
+            'goodReps': self.goodReps,
             'clear':True
         }
 
@@ -62,18 +64,17 @@ class LegRaise(Exercise):
             self.bestKps = [self.keypoints['rightAlpha'], self.keypoints['rightBeta']]
             self.side = 'R'
 
-        return leftC >= 0.3 or rightC >= 0.3
+        return leftC >= 0.3 or rightC >= 0.5
 
-    def grade(self):
-        self.alphaPoints = self.perceiver.collect(self.bestKps[0])
-        self.betaPoints = self.perceiver.collect(self.bestKps[1])
+    def grade(self, frame):
+        self.alphaPoints = self.perceiver.collect(self.bestKps[0], frame.shape)
+        self.betaPoints = self.perceiver.collect(self.bestKps[1], frame.shape)
 
         alphaAngle = angle(*self.alphaPoints)
         betaAngle = angle(*self.betaPoints)
+        gamma = betaAngle + (800/alphaAngle)
         
-        angles = map(lambda x: angle(*x), map(self.perceiver.collect, self.bestKps))
-        print(f"ALPHA: {alphaAngle}, BETA: {betaAngle}")
-        return angle(*self.betaPoints)
+        return gamma
 
     def update_reps(self, frame):
         h, w, _ = frame.shape
@@ -88,6 +89,8 @@ class LegRaise(Exercise):
 
         if dist < 300:
             if not self.down:
+                if self.formGrade == 'GOOD':
+                    self.goodReps += 1
                 self.reps += 1
                 self.down = True
         else:

@@ -1,7 +1,15 @@
 import React from "react";
 
 const VideoFeed: React.FC = () => (
-  <div style={{ textAlign: "center", height: "100%", width: "100%" }}>
+  <div
+    style={{
+      textAlign: "center",
+      height: "90%",
+      width: "100%",
+      marginTop: "auto",
+      padding: 0,
+    }}
+  >
     <img
       src={"http://127.0.0.1:5000/api/video_feed"}
       alt="Live camera feed"
@@ -9,6 +17,8 @@ const VideoFeed: React.FC = () => (
         width: "100%",
         borderRadius: 20,
         boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+        margin: 0,
+        padding: 0,
       }}
     />
   </div>

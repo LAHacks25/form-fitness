@@ -1,55 +1,53 @@
 .dashBoxesContainer {
   display: flex;
-  flex-direction: column;
   gap: 20px; /* Space between rows */
-  background-color: #e5e7eb; /* Light background like in the image */
   margin: 0;
   font-family: sans-serif;
   padding: 20px; /* Space around the container */
+  height: 100%;
+  overflow: hidden;
+  background-image: url("../assets/gtm.jpg");
+  background-size: cover;
+  background-position: center 80%;
+  image-rendering: smooth;
 }
 
-.box {
-  background-color: white;
-  border-radius: 20px;
-  padding: 70px;
-  height: 150px; /* Adjust as needed */
+.dashBoxesContainer::before {
+  content: ""; /* Required to create the pseudo-element */
+  position: absolute; /* Position it over the container */
+  margin-top: 2.5%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1; /* Ensure the overlay is on top of the background */
 }
 
-.top-box {
-  background-color: white;
-  border-radius: 20px;
-  padding: 20px;
-  height: 700px; /* Adjust as needed */
-  width: 1250px;
-}
-.bottom-box {
-  background-color: white;
-  border-radius: 20px;
-  padding: 70px;
-  height: 120px; /* Adjust as needed */
-  width: 1150px;
-}
-
-.middle-row {
-  display: flex;
-  gap: 20px;
-}
-
-.middle-column {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.left-box,
 .right-box {
   background-color: white;
   border-radius: 20px;
   padding: 70px;
-  height: 885px; /* Adjust as needed */
-  width: 100px;
+  width: 25%;
+  height: 100%;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
+}
+
+.video {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  z-index: 3;
+}
+
+.selection {
+  font-family: var(--primary-font);
+  font-size: 24px;
+  margin-top: 10px;
 }

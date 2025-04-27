@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FiPlus, FiX, FiSearch, FiChevronDown } from 'react-icons/fi'
 import { v4 as uuidv4 } from 'uuid'
 import './WorkoutLogger.css'
@@ -31,7 +31,7 @@ const initialWorkouts: Workout[] = [
 ]
 
 export default function WorkoutLogger() {
-  const [workouts, setWorkouts] = useState<Workout[]>(initialWorkouts)
+  const [workouts, setWorkouts] = useState<Workout[]>([])
   const [filter, setFilter] = useState('Last 30 days')
   const [query, setQuery] = useState('')
   const [showModal, setShowModal] = useState(false)
@@ -46,6 +46,25 @@ export default function WorkoutLogger() {
   const [exercise, setExercise] = useState(EXERCISES[0])
   const [sets, setSets] = useState(1)
   const [reps, setReps] = useState(1)
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch('/api/mongoget', {
+          credentials: 'include'
+        })
+        if (!res.ok) {
+          console.error('Failed to load workouts:', await res.text())
+          return
+        }
+        const { workouts: data } = await res.json()
+        setWorkouts(data)
+      } catch (err) {
+        console.error('Network error loading workouts:', err)
+      }
+    }
+    load()
+  }, [])
 
   function openNewWorkoutModal() {
     setNewWorkout({
@@ -138,7 +157,7 @@ async function saveWorkout(e: React.FormEvent) {
         </button>
 
         <ul className="list">
-          {filtered.map(w => (
+          {workouts.map(w => (
             <li key={w.id} className="listItem">
               <div className="workoutInfo">
                 <div className="workoutTitle">{w.title}</div>

@@ -55,6 +55,25 @@ def mongowrite():
     
     return jsonify({'inserted_id': str(workout_id)}), 201
 
+@main.route('/api/mongoget', methods=['GET'])
+@login_required
+def mongoget():
+    users = current_app.mongo_client['FormFitness']['users']
+    user_doc = users.find_one(
+        {'_id': ObjectId(current_user.id)},
+        {'workouts': 1}
+    )
+    workouts_map = user_doc.get('workouts', {})
+    workouts = []
+    for _id, wk in workouts_map.items():
+       workouts.append({
+            'id': str(wk['_id']),      # ensure id is a string
+            'title': wk['title'],
+            'date': wk['date'],        # you stored date as ISO string
+            'exercises': wk.get('exercises', [])
+        })
+    return jsonify(workouts=workouts), 200
+
 @main.route('/api/pushup_data_stream')
 def pushup_data_stream():
     def event_stream():

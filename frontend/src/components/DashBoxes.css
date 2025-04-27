@@ -1,12 +1,27 @@
 .dashBoxesContainer {
   display: flex;
   gap: 20px; /* Space between rows */
-  background-color: #e5e7eb; /* Light background like in the image */
   margin: 0;
   font-family: sans-serif;
   padding: 20px; /* Space around the container */
   height: 100%;
   overflow: hidden;
+  background-image: url("../assets/gtm.jpg");
+  background-size: cover;
+  background-position: center 80%;
+  image-rendering: smooth;
+}
+
+.dashBoxesContainer::before {
+  content: ""; /* Required to create the pseudo-element */
+  position: absolute; /* Position it over the container */
+  margin-top: 2.5%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1; /* Ensure the overlay is on top of the background */
 }
 
 .right-box {
@@ -19,6 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
 }
 
 .video {
@@ -27,6 +43,7 @@
   justify-content: space-between;
   align-items: center;
   width: 75%;
+  z-index: 3;
 }
 
 .selection {

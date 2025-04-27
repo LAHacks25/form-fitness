@@ -74,7 +74,6 @@ class LegRaise(Exercise):
         betaAngle = angle(*self.betaPoints)
         gamma = betaAngle + (800/alphaAngle)
         
-        print(f"ALPHA: {alphaAngle}, BETA: {betaAngle}, GAMMA: {gamma}")
         return gamma
 
     def update_reps(self, frame):

@@ -64,7 +64,7 @@ const DashBoxes: React.FC<DashBoxesProps> = ({ exercise, hidden }) => {
   };
 
   const stopRecording = () => {
-    fetch("http://127.0.0.1:5000/api/stop_camera", { method: "GET" })
+    fetch("/api/stop_camera", { method: "GET" })
       .then((response) => response.json())
       .then((data) => console.log(data.message));
     setIsRecording(false);

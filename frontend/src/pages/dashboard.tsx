@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
 
     if (selectedExercise !== "") {
       // Send POST request
-      fetch("http://127.0.0.1:5000/api/send_string", {
+      fetch("/api/send_string", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

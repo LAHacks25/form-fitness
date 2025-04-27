@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 interface PushupData {
-  reps: number;
   grade: string;
+  reps: number;
+  goodReps: number;
 }
 
 interface DataProps {
@@ -10,7 +11,11 @@ interface DataProps {
 }
 
 const Data: React.FC<DataProps> = ({ exercise }) => {
-  const [data, setData] = useState<PushupData>({ reps: 0, grade: "" });
+  const [data, setData] = useState<PushupData>({
+    grade: "",
+    reps: 0,
+    goodReps: 0,
+  });
 
   useEffect(() => {
     const eventSource = new EventSource("/api/pushup_data_stream");
@@ -39,6 +44,7 @@ const Data: React.FC<DataProps> = ({ exercise }) => {
     <div>
       <h2>{exercise} Tracker</h2>
       <p>Reps: {data.reps}</p>
+      <p>Good Reps: {data.goodReps}</p>
       <p>Grade: {data.grade}</p>
     </div>
   );

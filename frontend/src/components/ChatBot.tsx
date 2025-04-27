@@ -92,9 +92,10 @@ const Chatbot = () => {
 
     try {
       const response = await fetch(
-        import.meta.env.GEMINI_API_URL,
+        import.meta.env.VITE_GEMINI_API_URL,
         requestOptions
       );
+
       const data = (await response.json()) as ApiResponse;
 
       console.log("API Response:", data);

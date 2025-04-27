@@ -3,24 +3,20 @@ from pose_estimation.exercises.Exercise import Exercise
 from pose_estimation.utils.angle import angle
 from collections import deque
 
-class Pushups(Exercise):
+class ShoulderPress(Exercise):
     def __init__(self, perceiver):
-        super().__init__(perceiver) 
-
+        super().__init__(perceiver)
         self.keypoints = {
-            'left': [5, 11, 15],    # shoulder, hip, ankle
-            'right': [6, 12, 16],
-            'countL': [5, 9],       # shoulder, wrist
-            'countR': [6, 10]
+            'left':[9, 7, 5], # wrist, elbow, shoulder
+            'right':[10, 8, 6],
         }
-        
-        self.side = None
         self.bestKps = None
 
         self.reps = 0
-        self.down = False
 
-        self.smoothingWindow = deque(maxlen=15)
+        self.moe = 10
+        self.min_elbow_angle = 180
+        self.down = False
 
     def process(self, frame):
         self.perceiver.detect(frame)
@@ -29,8 +25,11 @@ class Pushups(Exercise):
             if not self.verify():
                 return {'grade': 'BAD', 'reps': self.reps, 'clear':False}
 
-        theta = self.grade()
-        self.smoothingWindow.append(theta)
+        if self.grade() == 0:
+            return {'grade': 'BAD', 'reps': self.reps, 'clear':True}
+        
+
+        # self.smoothingWindow.append(theta)
         smoothTheta = np.mean(self.smoothingWindow)
 
         self.update_reps(frame)
@@ -44,24 +43,22 @@ class Pushups(Exercise):
         }
 
     def verify(self):
-        left = self.perceiver.collect(self.keypoints['left'])
-        right = self.perceiver.collect(self.keypoints['right'])
+        idxs = np.concatenate([self.keypoints['left'], self.keypoints['right']])
+        kpts = self.perceiver.collect(idxs) 
 
-        leftC = np.mean([kp[2] for kp in left])
-        rightC = np.mean([kp[2] for kp in right])
+        c = np.mean([kp[2] for kp in kpts])
 
-        if leftC > rightC:
-            self.bestKps = self.keypoints['left']
-            self.side = 'L'
-        else:
-            self.bestKps = self.keypoints['right']
-            self.side = 'R'
-
-        return leftC >= 0.3 or rightC >= 0.3
+        return c >= 0.3
 
     def grade(self):
-        points = self.perceiver.collect(self.bestKps)
-        return angle(*points)
+        left, right = np.array((map(self.perceiver.collect, self.keypoints.values())))
+
+        slope = (left[1][0] - right[1][0]) / (left[1][1] - right[1][1])
+        print(slope)
+        if slope > 2:
+            return 0
+        
+        return 1
 
     def update_reps(self, frame):
         h, w, _ = frame.shape

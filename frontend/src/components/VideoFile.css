@@ -1,0 +1,32 @@
+.container {
+    text-align: center;
+    height: 90%;
+    width: 100%;
+    padding: 0;
+}
+
+
+.camera{
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    margin-bottom: 70px;
+    padding: 0;
+    z-index: 3;
+}
+
+.mimic {
+    position: absolute;
+    width: 70%;
+    height: 60%;
+    border-radius: 20px;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 50px;
+    z-index: 1;
+}
+
+.hidden {
+    display: none;
+}

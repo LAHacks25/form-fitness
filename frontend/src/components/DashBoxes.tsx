@@ -1,40 +1,3 @@
-// import React from "react";
-// import "./DashBoxes.css";
-// import VideoFile from "./VideoFile";
-// import Data from "./Data";
-
-// interface DashBoxesProps {
-//   exercise: string;
-//   hidden: boolean;
-// }
-
-// const DashBoxes: React.FC<DashBoxesProps> = ({ exercise, hidden }) => {
-//   return (
-//     <div className={`dashBoxesContainer`}>
-//       <div className="video">
-//         <p className="selection">{`You are recording ${exercise}`}</p>
-//         <VideoFile hidden={hidden} />
-//         <button
-//           className={`stopButton ${hidden ? "hidden" : ""}`}
-//           onClick={() => {
-//             fetch("http://127.0.0.1:5000/api/stop_camera", { method: "GET" })
-//               .then((response) => response.json())
-//               .then((data) => console.log(data.message));
-//           }}
-//         >
-//           {" "}
-//           End Recording
-//         </button>
-//       </div>
-//       <div className={`right-box ${hidden ? "hidden" : ""}`}>
-//         <Data />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DashBoxes;
-
 import React, { useState, useEffect } from "react";
 import "./DashBoxes.css";
 import VideoFile from "./VideoFile";
@@ -75,7 +38,10 @@ const DashBoxes: React.FC<DashBoxesProps> = ({ exercise, hidden }) => {
       <div className="video">
         <p className="selection">{`You are recording ${exercise}`}</p>
         {!isRecording ? (
-          <button className="startButton" onClick={startRecording}>
+          <button
+            className={`startButton ${hidden ? "hidden" : ""}`}
+            onClick={startRecording}
+          >
             Start Recording
           </button>
         ) : (

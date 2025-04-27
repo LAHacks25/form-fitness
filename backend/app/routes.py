@@ -27,6 +27,11 @@ def video_feed():
         mimetype='multipart/x-mixed-replace; boundary=frame'
     )
 
+@main.route('/api/stop_camera', methods=['GET'])
+def stop_camera():
+    cam.cap.release()
+    return jsonify({'message': 'Camera stopped'}), 200
+
 @main.route('/api/mongowrite', methods=['POST'])
 def mongowrite():
     data = request.get_json()

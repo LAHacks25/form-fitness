@@ -1,6 +1,5 @@
 import { NavBar } from "../components/Navbar";
 import logo from "../assets/logo2.jpg";
-import Carousel from "../components/Carousel";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Chatbot from "../components/ChatBot";
@@ -16,12 +15,9 @@ export default function Home() {
     const checkLoginStatus = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(
-          "/api/auth/check_auth",
-          {
-            credentials: "include", // Important for cookies/session
-          }
-        );
+        const response = await fetch("/api/auth/check_auth", {
+          credentials: "include", // Important for cookies/session
+        });
         const data = await response.json();
         setIsLoggedIn(data.authenticated);
       } catch (error) {
@@ -51,7 +47,9 @@ export default function Home() {
         <NavLink className="nav" to={isLoggedIn ? "/dashboard" : "/login"}>
           Get Started
         </NavLink>
-        <Chatbot />
+        <div className="chatbot">
+          <Chatbot />
+        </div>
       </div>
     </div>
   );

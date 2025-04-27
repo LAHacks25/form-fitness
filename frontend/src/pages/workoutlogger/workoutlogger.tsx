@@ -21,7 +21,7 @@ const EXERCISES = ["Push Up", "Leg Raise", "Shoulder Press"];
 const initialWorkouts: Workout[] = [
   {
     id: "1",
-    title: "Example Workout",
+    title: "Example Workout:",
     exercises: [
       { exercise: "Shoulder Press", sets: 4, reps: 12 },
       { exercise: "Push Up", sets: 4, reps: 12 },
@@ -51,7 +51,7 @@ export default function WorkoutLogger() {
   function openNewWorkoutModal() {
     setNewWorkout({
       id: uuidv4(),
-      title: "New Workout",
+      title: "Set New Workout",
       exercises: [],
       date: new Date().toISOString().split("T")[0],
     });
@@ -109,6 +109,7 @@ export default function WorkoutLogger() {
 
   return (
     <div className="page">
+      <NavBar />
       <div className="card">
         <header className="header">
           <h1 className="title">Workout Logger</h1>
@@ -165,6 +166,12 @@ export default function WorkoutLogger() {
         <div className="modalOverlay">
           <div className="modal">
             <header className="modalHeader">
+              <button
+                className="closeButton"
+                onClick={() => setShowModal(false)}
+              >
+                X
+              </button>
               <input
                 className="modalTitleInput"
                 value={newWorkout.title}
@@ -172,12 +179,6 @@ export default function WorkoutLogger() {
                   setNewWorkout((w) => ({ ...w, title: e.target.value }))
                 }
               />
-              <button
-                className="closeButton"
-                onClick={() => setShowModal(false)}
-              >
-                <FiX />
-              </button>
             </header>
 
             <form className="modalForm" onSubmit={saveWorkout}>

@@ -17,7 +17,7 @@ export default function Home() {
       try {
         setIsLoading(true);
         const response = await fetch(
-          "http://127.0.0.1:5000/api/auth/check_auth",
+          "/api/auth/check_auth",
           {
             credentials: "include", // Important for cookies/session
           }

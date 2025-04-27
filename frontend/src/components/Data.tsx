@@ -10,7 +10,7 @@ const Data: React.FC = () => {
 
   useEffect(() => {
     const eventSource = new EventSource(
-      "http://127.0.0.1:5000/api/pushup_data_stream"
+      "/api/pushup_data_stream"
     );
 
     eventSource.onmessage = (event) => {

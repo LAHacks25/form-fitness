@@ -35,7 +35,7 @@
 
 // export default DashBoxes;
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DashBoxes.css";
 import VideoFile from "./VideoFile";
 import Data from "./Data";
@@ -47,6 +47,17 @@ interface DashBoxesProps {
 
 const DashBoxes: React.FC<DashBoxesProps> = ({ exercise, hidden }) => {
   const [isRecording, setIsRecording] = useState(false);
+  const [exerciseFormatted, setExerciseFormatted] = useState("");
+
+  useEffect(() => {
+    if (exercise === "pushups") {
+      setExerciseFormatted("Push Up");
+    } else if (exercise === "legraise") {
+      setExerciseFormatted("Leg Raise");
+    } else {
+      setExerciseFormatted("Shoulder Press");
+    }
+  }, [exercise]);
 
   const startRecording = () => {
     setIsRecording(true);
@@ -79,7 +90,7 @@ const DashBoxes: React.FC<DashBoxesProps> = ({ exercise, hidden }) => {
         </div>
       </div>
       <div className={`right-box ${hidden ? "hidden" : ""}`}>
-        <Data />
+        <Data exercise={exerciseFormatted} />
       </div>
     </div>
   );

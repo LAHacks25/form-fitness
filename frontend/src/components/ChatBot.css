@@ -243,5 +243,4 @@
   background: #2d4849;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Important to clip image to circle */
 }

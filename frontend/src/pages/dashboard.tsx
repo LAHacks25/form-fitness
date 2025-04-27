@@ -62,8 +62,8 @@ const Dashboard: React.FC = () => {
             Select an Exercise
           </option>
           <option value="pushups">Pushups</option>
-          <option value="situps">Situps</option>
-          <option value="shoulder-press">Shoulder Press</option>
+          <option value="legraise">Leg Raises</option>
+          <option value="shoulderpress">Shoulder Press</option>
         </select>
         <button className="submitButton" type="submit" onClick={handleSubmit}>
           Submit

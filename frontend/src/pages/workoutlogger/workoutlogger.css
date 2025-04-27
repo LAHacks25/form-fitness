@@ -225,7 +225,7 @@ select {
 /* save button */
 .saveButton {
   padding: 0.5rem;
-  background: #black;
+  background: black;
   color: white;
   border: none;
   border-radius: 6px;

@@ -66,7 +66,7 @@ const ChatForm: React.FC<ChatFormProps> = ({
         required
       />
       <button type="submit" className="material-symbols-rounded">
-        arrow_upward
+        {`>`}
       </button>
     </form>
   );

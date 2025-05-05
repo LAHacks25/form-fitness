@@ -36,7 +36,7 @@
 
 .chatbot-popup .chat-header {
   display: flex;
-  background: #2d4849;
+  background: var(--dark-color);
   justify-content: space-between;
   align-items: center;
   padding: 15px 22px;
@@ -56,7 +56,7 @@
   flex-shrink: 0;
   background: #fff;
   border-radius: 50%;
-  fill: #2d4849;
+  fill: var(--dark-color);
 }
 
 .header-info .logo-text {
@@ -70,7 +70,7 @@
   width: 40px;
   border: none;
   outline: none;
-  background: #2d4849;
+  background: var(--dark-color);
   color: #fff;
   cursor: pointer;
   font-size: 1.9rem;
@@ -80,7 +80,7 @@
 }
 
 .chat-header button:hover {
-  background: #2d4849;
+  background: var(--dark-color);
 }
 
 .chat-body {
@@ -100,13 +100,14 @@
   gap: 11px;
   align-items: flex-start;
   margin-bottom: 15px;
+  margin-right: auto;
 }
 
 .chat-body .bot-message svg {
   height: 35px;
   width: 35px;
   padding: 6px;
-  background: #2d4849;
+  background: var(--dark-color);
   border-radius: 50%;
   fill: #fff;
   flex-shrink: 0;
@@ -134,7 +135,7 @@
 }
 
 .chat-body .user-message .message-text {
-  background: #2d4849;
+  background: var(--dark-color);
   border-radius: 13px 13px 3px 13px;
   color: #fff;
   margin-left: auto;
@@ -142,7 +143,7 @@
 
 .chat-footer {
   width: 100%;
-  background: #2d4849;
+  background: var(--dark-color);
   padding: 15px 22px 20px;
   border-top: 1px solid #eee;
   /* Ensure footer stays at bottom */
@@ -159,7 +160,7 @@
 }
 
 .chat-footer .chat-form:focus-within {
-  outline: 2px solid #2d4849;
+  outline: 2px solid var(--dark-color);
 }
 
 .chat-form .message-input {
@@ -184,12 +185,12 @@
   flex-shrink: 0;
   margin-right: 6px;
   border-radius: 50%;
-  background: #2d4849;
+  background: var(--dark-color);
   transition: 0.2s ease;
 }
 
 .chat-form button:hover {
-  background: #2d4849;
+  background: var(--dark-color);
 }
 
 .chat-form .message-input:valid ~ button {
@@ -225,7 +226,7 @@
   display: flex;
   cursor: pointer;
   border-radius: 50%;
-  background: #2d4849;
+  background: var(--dark-color);
   align-items: center;
   justify-content: center;
 }
@@ -240,7 +241,7 @@
   display: flex;
   cursor: pointer;
   border-radius: 50%;
-  background: #2d4849;
+  background: var(--dark-color);
   align-items: center;
   justify-content: center;
 }

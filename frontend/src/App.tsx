@@ -6,6 +6,7 @@ import Dashboard from "./pages/dashboard";
 import Login from "./pages/login";
 import WorkoutLogger from "./pages/workoutlogger/workoutlogger";
 import Signup from "./pages/signup";
+import Profile from "./pages/profile";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/workouttracker" element={<WorkoutLogger />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>

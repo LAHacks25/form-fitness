@@ -142,7 +142,7 @@ const Chatbot = () => {
             className="material-symbols-rounded"
             onClick={() => setShowChatbot((prev) => !prev)}
           >
-            keyboard_arrow_down
+            X
           </button>
         </div>
 
